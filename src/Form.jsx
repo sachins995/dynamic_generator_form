@@ -33,13 +33,14 @@ const Form = ({ formFields }) => {
 
   return (
     <form  className = "result" onSubmit={handleSubmit}>
-        <h1 className='field'>Fields</h1>
+
+      {formFields.length>0?<h2 className='field'>Fields</h2>:""}  
       {formFields.map(field => (
         <div className = "form" key={field.name}>
           <label className='label' htmlFor={field.name}>{field.label}</label>
           {field.type === 'text' && (
             <input
-              className='input1'
+              className='input1 form-label'
               type="text"
               id={field.name}
               name={field.name}
@@ -49,7 +50,7 @@ const Form = ({ formFields }) => {
           )}
           {field.type === 'textarea' && (
             <textarea
-              className='txt'
+              className='txt form-label'
               id={field.name}
               name={field.name}
               value={field.value}
@@ -58,7 +59,7 @@ const Form = ({ formFields }) => {
           )}
           {field.type === 'dropdown' && (
             <select
-              className='drop'
+              className='drop '
               id={field.name}
               name={field.name}
               value={field.value}
@@ -83,8 +84,10 @@ const Form = ({ formFields }) => {
           {field.type === 'radio' && (
             <>
               {field.options.map(option => (
-                <label key={option}>
+                <label  className="check" key={option}>
+                   
                   <input
+                    className="form-label"
                     type="radio"
                     name={field.name}
                     value={option} 
@@ -101,7 +104,7 @@ const Form = ({ formFields }) => {
             <label htmlFor={field.name}>{field.label}</label>
              <input
               type="file"
-              className="form-control"
+              className="file"
               accept="jpg" 
               onChange={(e) => {
                 handleChange(e, field.label)
@@ -115,9 +118,10 @@ const Form = ({ formFields }) => {
         </div>
         
       ))}
-       {formFields?<button className = "btn2 btn btn btn-info" type="submit">Submit</button>:" "}
+       {formFields.length>0?<button className = "submit btn btn btn-info" type="submit">Submit</button>:" "}
     </form>
   );
 };
+
 
 export default Form;
